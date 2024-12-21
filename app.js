@@ -27,8 +27,7 @@ console.log(indicators)
 
 
 function toggleChoices() {
-    console.log(hiddenCol.style)
-
+    // console.log(hiddenCol.style)
     if (hiddenCol.style.visibility === "visible")
         hiddenCol.style.visibility = "hidden"
     else
@@ -112,59 +111,167 @@ document.addEventListener('click', (event) => {
 })
 
 function changeIndicators() {
+    // let firstOccurance=0
+    // let secondOccurance=0
+    // let thirdOccurance=0
+    // let forthOccurance=0
+    const colorPattern = [circles[0].style.backgroundColor, circles[1].style.backgroundColor, circles[2].style.backgroundColor, circles[3].style.backgroundColor]
+    console.log(colorPattern)
+    const countOccurrences = colorPattern.reduce((acc, item) => {
+        acc[item] = (acc[item] || 0) + 1;
+        return acc;
+    }, {});
+    // console.log(circles[0].style.backgroundColor)
+    console.log(countOccurrences)
+    // console.log(countOccurrences[circles[0].style.backgroundColor])
+    // countOccurrences[circles[0].style.backgroundColor] -= 1
+    // console.log(countOccurrences[circles[0].style.backgroundColor])
 
     //first row
-    if (circles[colCounter].style.backgroundColor === circles[0].style.backgroundColor)
+    if (circles[colCounter].style.backgroundColor === circles[0].style.backgroundColor){
         indicators[colCounter].style.backgroundColor = "green"
-    else if ((circles[colCounter].style.backgroundColor === circles[1].style.backgroundColor &&
-        circles[colCounter + 1].style.backgroundColor !== circles[1].style.backgroundColor)
-        ||
-        (circles[colCounter].style.backgroundColor === circles[2].style.backgroundColor &&
-            circles[colCounter + 2].style.backgroundColor !== circles[2].style.backgroundColor)
-        ||
-        (circles[colCounter].style.backgroundColor === circles[3].style.backgroundColor &&
-            circles[colCounter + 3].style.backgroundColor !== circles[3].style.backgroundColor)
+    countOccurrences[circles[0].style.backgroundColor] -= 1
+    }
 
-    )
+    else if (circles[colCounter].style.backgroundColor === circles[1].style.backgroundColor &&
+        circles[colCounter + 1].style.backgroundColor !== circles[1].style.backgroundColor &&
+        countOccurrences[circles[0].style.backgroundColor]) {
+        indicators[colCounter+0].style.backgroundColor = "orange"
+        console.log(countOccurrences)
+        countOccurrences[circles[1].style.backgroundColor] -= 1
+        console.log(countOccurrences)
+
+    }
+
+    else if (circles[colCounter].style.backgroundColor === circles[2].style.backgroundColor &&
+        circles[colCounter + 2].style.backgroundColor !== circles[2].style.backgroundColor &&
+        countOccurrences[circles[2].style.backgroundColor]) {
         indicators[colCounter].style.backgroundColor = "orange"
+        console.log(countOccurrences)
+        countOccurrences[circles[2].style.backgroundColor] -= 1
+        console.log(countOccurrences)
+
+    }
+
+
+    else if (circles[colCounter].style.backgroundColor === circles[3].style.backgroundColor &&
+        circles[colCounter + 3].style.backgroundColor !== circles[3].style.backgroundColor &&
+        countOccurrences[circles[3].style.backgroundColor]) {
+        indicators[colCounter].style.backgroundColor = "orange"
+        console.log(countOccurrences)
+        countOccurrences[circles[3].style.backgroundColor] -= 1
+        console.log(countOccurrences)
+    }
+
     else
         indicators[colCounter].style.backgroundColor = "red"
 
     //second row
-    if (circles[colCounter + 1].style.backgroundColor === circles[1].style.backgroundColor)
+    if (circles[colCounter + 1].style.backgroundColor === circles[1].style.backgroundColor){
         indicators[colCounter + 1].style.backgroundColor = "green"
-    else if (circles[colCounter + 1].style.backgroundColor === circles[0].style.backgroundColor ||
-        circles[colCounter + 1].style.backgroundColor === circles[2].style.backgroundColor ||
-        circles[colCounter + 1].style.backgroundColor === circles[3].style.backgroundColor
-    )
+        countOccurrences[circles[1].style.backgroundColor] -= 1
+    }
+
+    else if (circles[colCounter + 1].style.backgroundColor === circles[0].style.backgroundColor &&
+        circles[colCounter].style.backgroundColor !== circles[0].style.backgroundColor &&
+        countOccurrences[circles[0].style.backgroundColor]) {
         indicators[colCounter + 1].style.backgroundColor = "orange"
+        console.log(countOccurrences)
+        countOccurrences[circles[colCounter + 1].style.backgroundColor] -= 1
+        console.log(countOccurrences)
+
+    }
+
+
+    else if
+        (circles[colCounter + 1].style.backgroundColor === circles[2].style.backgroundColor &&
+        circles[colCounter + 2].style.backgroundColor !== circles[2].style.backgroundColor &&
+        countOccurrences[circles[2].style.backgroundColor]) {
+        indicators[colCounter + 1].style.backgroundColor = "orange"
+        console.log(countOccurrences)
+        countOccurrences[circles[2].style.backgroundColor] -= 1
+        console.log(countOccurrences)
+        }
+
+    else if
+        (circles[colCounter + 1].style.backgroundColor === circles[3].style.backgroundColor &&
+        circles[colCounter + 3].style.backgroundColor !== circles[3].style.backgroundColor &&
+        countOccurrences[circles[3].style.backgroundColor]) {
+        indicators[colCounter + 1].style.backgroundColor = "orange"
+        console.log(countOccurrences)
+        countOccurrences[circles[colCounter + 1].style.backgroundColor] -= 1
+        console.log(countOccurrences)
+        }
     else
         indicators[colCounter + 1].style.backgroundColor = "red"
 
     //third row
-    if (circles[colCounter + 2].style.backgroundColor === circles[2].style.backgroundColor)
+    if (circles[colCounter + 2].style.backgroundColor === circles[2].style.backgroundColor){
         indicators[colCounter + 2].style.backgroundColor = "green"
-    else if (circles[colCounter + 2].style.backgroundColor === circles[0].style.backgroundColor ||
-        circles[colCounter + 2].style.backgroundColor === circles[1].style.backgroundColor ||
-        circles[colCounter + 2].style.backgroundColor === circles[3].style.backgroundColor
-    )
+        countOccurrences[circles[colCounter + 2].style.backgroundColor] -= 1
+    }
+    else if (circles[colCounter + 2].style.backgroundColor === circles[0].style.backgroundColor &&
+        circles[colCounter].style.backgroundColor !== circles[0].style.backgroundColor &&
+        countOccurrences[circles[0].style.backgroundColor]) {
         indicators[colCounter + 2].style.backgroundColor = "orange"
+        console.log(countOccurrences)
+        countOccurrences[circles[colCounter + 2].style.backgroundColor] -= 1
+        console.log(countOccurrences)
+        }
+
+    else if
+        (circles[colCounter + 2].style.backgroundColor === circles[1].style.backgroundColor &&
+        circles[colCounter + 1].style.backgroundColor !== circles[1].style.backgroundColor &&
+        countOccurrences[circles[1].style.backgroundColor]) {
+        indicators[colCounter + 2].style.backgroundColor = "orange"
+        console.log(countOccurrences)
+        countOccurrences[circles[colCounter + 2].style.backgroundColor] -= 1
+        console.log(countOccurrences)
+        }
+
+    else if
+        (circles[colCounter + 2].style.backgroundColor === circles[3].style.backgroundColor &&
+        circles[colCounter + 3].style.backgroundColor !== circles[3].style.backgroundColor &&
+        countOccurrences[circles[colCounter + 2].style.backgroundColor]) {
+        indicators[colCounter + 2].style.backgroundColor = "orange"
+        console.log(countOccurrences)
+        countOccurrences[circles[colCounter + 2].style.backgroundColor] -= 1
+        console.log(countOccurrences)
+        }
     else
         indicators[colCounter + 2].style.backgroundColor = "red"
 
     //forth row
-    if (circles[colCounter + 3].style.backgroundColor === circles[3].style.backgroundColor)
+    if (circles[colCounter + 3].style.backgroundColor === circles[3].style.backgroundColor){
         indicators[colCounter + 3].style.backgroundColor = "green"
-    else if (circles[colCounter + 3].style.backgroundColor === circles[0].style.backgroundColor ||
-        circles[colCounter + 3].style.backgroundColor === circles[1].style.backgroundColor ||
-        circles[colCounter + 3].style.backgroundColor === circles[2].style.backgroundColor
-    )
+        countOccurrences[circles[3].style.backgroundColor] -= 1
+    }
+    else if (circles[colCounter + 3].style.backgroundColor === circles[0].style.backgroundColor &&
+        circles[colCounter].style.backgroundColor !== circles[0].style.backgroundColor &&
+        countOccurrences[circles[0].style.backgroundColor]) {
         indicators[colCounter + 3].style.backgroundColor = "orange"
+        console.log(countOccurrences)
+        countOccurrences[circles[colCounter+3].style.backgroundColor] -= 1
+        console.log(countOccurrences)
+        }
+    else if (circles[colCounter + 3].style.backgroundColor === circles[1].style.backgroundColor &&
+        circles[colCounter + 1].style.backgroundColor !== circles[1].style.backgroundColor &&
+        countOccurrences[circles[1].style.backgroundColor]) {
+        indicators[colCounter + 3].style.backgroundColor = "orange"
+        console.log(countOccurrences)
+        countOccurrences[circles[colCounter+3].style.backgroundColor] -= 1
+        console.log(countOccurrences)
+        }
+    else if (circles[colCounter + 3].style.backgroundColor === circles[2].style.backgroundColor &&
+        circles[colCounter + 2].style.backgroundColor !== circles[2].style.backgroundColor &&
+        countOccurrences[circles[2].style.backgroundColor]) {
+        indicators[colCounter + 3].style.backgroundColor = "orange"
+        console.log(countOccurrences)
+        countOccurrences[circles[colCounter+3].style.backgroundColor] -= 1
+        console.log(countOccurrences)
+        }
     else
         indicators[colCounter + 3].style.backgroundColor = "red"
-
-
-
 }
 
 function winnigCheck() {
@@ -211,3 +318,11 @@ initialize()
 // console.log(circles[3].style.backgroundColor)
 
 
+console.log(Boolean(4))
+if(4)
+    console.log("4 true")
+
+if(0)
+    console.log("0 true")
+else
+console.log("0 fale")
