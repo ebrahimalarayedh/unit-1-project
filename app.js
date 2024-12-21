@@ -116,9 +116,15 @@ function changeIndicators() {
     //first row
     if (circles[colCounter].style.backgroundColor === circles[0].style.backgroundColor)
         indicators[colCounter].style.backgroundColor = "green"
-    else if (circles[colCounter].style.backgroundColor === circles[1].style.backgroundColor ||
-        circles[colCounter].style.backgroundColor === circles[2].style.backgroundColor ||
-        circles[colCounter].style.backgroundColor === circles[3].style.backgroundColor
+    else if ((circles[colCounter].style.backgroundColor === circles[1].style.backgroundColor &&
+        circles[colCounter + 1].style.backgroundColor !== circles[1].style.backgroundColor)
+        ||
+        (circles[colCounter].style.backgroundColor === circles[2].style.backgroundColor &&
+            circles[colCounter + 2].style.backgroundColor !== circles[2].style.backgroundColor)
+        ||
+        (circles[colCounter].style.backgroundColor === circles[3].style.backgroundColor &&
+            circles[colCounter + 3].style.backgroundColor !== circles[3].style.backgroundColor)
+
     )
         indicators[colCounter].style.backgroundColor = "orange"
     else
