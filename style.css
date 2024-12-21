@@ -1,11 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    
-
+    background-color: #2998ab7d;
 
   }
   #board{
@@ -24,10 +20,56 @@ body {
     margin: 12px;
 
   }
+  #indicator{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .icircle{
+    width: 25px;
+    height: 25px;
+    background-color: lightyellow;
+    border-radius: 50%;
+
+    margin: 12px;
+
+  }
+  #ifirst-column{
+    visibility: hidden;
+      
+  }
+  .circle:hover{
+    background-color: white;
+
+  }
 
 #coded-column{
     visibility: hidden;
 }
 #buttons{
-    margin-top: 25px;
+    margin-top: 80px;
+}
+
+.dropdown {
+  position: absolute;
+  display: none; /* Initially hidden */
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 1000;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 150px;
+}
+
+.dropdown li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown li:hover {
+  background-color: #f0f0f0;
 }
