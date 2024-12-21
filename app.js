@@ -1,7 +1,7 @@
 let circleTochange
 // colour array
 const colorsArray = ["red", "yellow", "blue", "purple", "green", "orange"]
-let colCounter = 4
+let colCounter
 
 const hiddenCol = document.querySelector("#coded-column")
 console.log(hiddenCol)
@@ -18,6 +18,10 @@ const dropdown = document.getElementById('dropdown')
 
 const message = document.getElementById('message')
 
+const resetBtn = document.getElementById("reset-button")
+resetBtn.addEventListener("click", reset)
+
+
 
 function toggleChoices() {
     console.log(hiddenCol.style)
@@ -29,6 +33,7 @@ function toggleChoices() {
 }
 
 function initialize() {
+    colCounter = 4
     circles[0].style.backgroundColor = colorsArray[Math.floor((Math.random() * 6))]
     circles[1].style.backgroundColor = colorsArray[Math.floor((Math.random() * 6))]
     circles[2].style.backgroundColor = colorsArray[Math.floor((Math.random() * 6))]
@@ -109,16 +114,26 @@ function winnigCheck() {
         circles[colCounter + 2].style.backgroundColor === circles[2].style.backgroundColor &&
         circles[colCounter + 3].style.backgroundColor === circles[3].style.backgroundColor
     ) {
-        message.textContent= "Congratulation! You have won!!"
+        message.textContent = "Congratulation! You have won!!"
         message.style.visibility = "visible"
         colCounter = 41
     }
     else
-    colCounter += 4
-if (colCounter==40){
-    message.textContent= "Gameover"
+        colCounter += 4
+    if (colCounter == 40) {
+        message.textContent = "Gameover"
         message.style.visibility = "visible"
+    }
 }
+
+function reset() {
+    message.textContent = ""
+    message.style.visibility = "hidden"
+    hiddenCol.style.visibility = "hidden"
+    circles.forEach((e)=>{
+        e.style.backgroundColor =""
+    })
+    initialize()
 }
 
 
