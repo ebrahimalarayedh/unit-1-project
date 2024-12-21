@@ -1,6 +1,7 @@
 let circleTochange
 // colour array
-colorsArray = ["red", "yellow", "blue", "purple", "green", "orange"]
+const colorsArray = ["red", "yellow", "blue", "purple", "green", "orange"]
+let colCounter = 4
 
 const hiddenCol = document.querySelector("#coded-column")
 console.log(hiddenCol)
@@ -13,7 +14,9 @@ console.log(showBt)
 const circles = document.querySelectorAll(".circle")
 console.log(circles)
 
-const dropdown = document.getElementById('dropdown');
+const dropdown = document.getElementById('dropdown')
+
+const message = document.getElementById('message')
 
 
 function toggleChoices() {
@@ -26,10 +29,10 @@ function toggleChoices() {
 }
 
 function initialize() {
-    circles[0].style.backgroundColor = colorsArray[Math.floor((Math.random()*6))]
-    circles[1].style.backgroundColor = colorsArray[Math.floor((Math.random()*6))]
-    circles[2].style.backgroundColor = colorsArray[Math.floor((Math.random()*6))]
-    circles[3].style.backgroundColor = colorsArray[Math.floor((Math.random()*6))]
+    circles[0].style.backgroundColor = colorsArray[Math.floor((Math.random() * 6))]
+    circles[1].style.backgroundColor = colorsArray[Math.floor((Math.random() * 6))]
+    circles[2].style.backgroundColor = colorsArray[Math.floor((Math.random() * 6))]
+    circles[3].style.backgroundColor = colorsArray[Math.floor((Math.random() * 6))]
 
 }
 
@@ -54,14 +57,18 @@ function toggleDropDown(event) {
     // console.log({ clientX: x, clientY: y })
     // console.log(`${x}px`)
     // console.log(`${y}px`)
-    if(event.target.style.backgroundColor == ""){
-        circleTochange= event.target.id
-        console.log(event.target)
-        console.log(circleTochange)
-        console.log(circles)
+    if (event.target.style.backgroundColor == "" && event.target.id >= colCounter && event.target.id <= colCounter + 3) {
+        circleTochange = event.target.id
+        // console.log(event.target)
+        // console.log(circleTochange)
+        // console.log(circles)
         dropdown.style.display = 'block';
         dropdown.style.left = `${x}px`;
         dropdown.style.top = `${y}px`;
+    }
+    else {
+        // console.log(event.target.className)
+        dropdown.style.display = 'none';
     }
 }
 
@@ -70,10 +77,25 @@ document.addEventListener('click', (event) => {
     if (event.target.className == "color-list") {
         // console.log(event.target.textContent)
         // console.log(circles[circleTochange].style.backgroundColor)
-        circles[circleTochange].style.backgroundColor = event.target.textContent 
+        circles[circleTochange].style.backgroundColor = event.target.textContent
         // console.log(circles[circleTochange].style.backgroundColor)
 
-        dropdown.style.display = 'none';      
+        dropdown.style.display = 'none';
+        if (circles[colCounter].style.backgroundColor !== "" && circles[colCounter + 1].style.backgroundColor !== ""
+            && circles[colCounter + 2].style.backgroundColor !== "" && circles[colCounter + 3].style.backgroundColor !== ""
+        ) {
+            // console.log(circles[colCounter].style.backgroundColor)
+            // console.log(circles[colCounter + 1].style.backgroundColor)
+            // console.log(circles[colCounter + 2].style.backgroundColor)
+            // console.log(circles[colCounter + 3].style.backgroundColor)
+            // console.log("line")
+            // console.log(circles[0].style.backgroundColor)
+            // console.log(circles[1].style.backgroundColor)
+            // console.log(circles[2].style.backgroundColor)
+            // console.log(circles[3].style.backgroundColor)
+            winnigCheck()
+        }
+
     }
     else if (event.target.className !== "circle") {
         // console.log(event.target.className)
@@ -81,4 +103,29 @@ document.addEventListener('click', (event) => {
     }
 })
 
+function winnigCheck() {
+    if (circles[colCounter].style.backgroundColor === circles[0].style.backgroundColor &&
+        circles[colCounter + 1].style.backgroundColor === circles[1].style.backgroundColor &&
+        circles[colCounter + 2].style.backgroundColor === circles[2].style.backgroundColor &&
+        circles[colCounter + 3].style.backgroundColor === circles[3].style.backgroundColor
+    ) {
+        message.textContent= "Congratulation! You have won!!"
+        message.style.visibility = "visible"
+        colCounter = 41
+    }
+    else
+    colCounter += 4
+if (colCounter==40){
+    message.textContent= "Gameover"
+        message.style.visibility = "visible"
+}
+}
+
+
 initialize()
+// console.log(circles[0].style.backgroundColor)
+// console.log(circles[1].style.backgroundColor)
+// console.log(circles[2].style.backgroundColor)
+// console.log(circles[3].style.backgroundColor)
+
+
