@@ -21,6 +21,9 @@ const message = document.getElementById('message')
 const resetBtn = document.getElementById("reset-button")
 resetBtn.addEventListener("click", reset)
 
+const indicators = document.querySelectorAll(".icircle")
+console.log(indicators)
+
 
 
 function toggleChoices() {
@@ -108,6 +111,56 @@ document.addEventListener('click', (event) => {
     }
 })
 
+function changeIndicators() {
+
+    //first row
+    if (circles[colCounter].style.backgroundColor === circles[0].style.backgroundColor)
+        indicators[colCounter].style.backgroundColor = "green"
+    else if (circles[colCounter].style.backgroundColor === circles[1].style.backgroundColor ||
+        circles[colCounter].style.backgroundColor === circles[2].style.backgroundColor ||
+        circles[colCounter].style.backgroundColor === circles[3].style.backgroundColor
+    )
+        indicators[colCounter].style.backgroundColor = "orange"
+    else
+        indicators[colCounter].style.backgroundColor = "red"
+
+    //second row
+    if (circles[colCounter + 1].style.backgroundColor === circles[1].style.backgroundColor)
+        indicators[colCounter + 1].style.backgroundColor = "green"
+    else if (circles[colCounter + 1].style.backgroundColor === circles[0].style.backgroundColor ||
+        circles[colCounter + 1].style.backgroundColor === circles[2].style.backgroundColor ||
+        circles[colCounter + 1].style.backgroundColor === circles[3].style.backgroundColor
+    )
+        indicators[colCounter + 1].style.backgroundColor = "orange"
+    else
+        indicators[colCounter + 1].style.backgroundColor = "red"
+
+    //third row
+    if (circles[colCounter + 2].style.backgroundColor === circles[2].style.backgroundColor)
+        indicators[colCounter + 2].style.backgroundColor = "green"
+    else if (circles[colCounter + 2].style.backgroundColor === circles[0].style.backgroundColor ||
+        circles[colCounter + 2].style.backgroundColor === circles[1].style.backgroundColor ||
+        circles[colCounter + 2].style.backgroundColor === circles[3].style.backgroundColor
+    )
+        indicators[colCounter + 2].style.backgroundColor = "orange"
+    else
+        indicators[colCounter + 2].style.backgroundColor = "red"
+
+    //forth row
+    if (circles[colCounter + 3].style.backgroundColor === circles[3].style.backgroundColor)
+        indicators[colCounter + 3].style.backgroundColor = "green"
+    else if (circles[colCounter + 3].style.backgroundColor === circles[0].style.backgroundColor ||
+        circles[colCounter + 3].style.backgroundColor === circles[1].style.backgroundColor ||
+        circles[colCounter + 3].style.backgroundColor === circles[2].style.backgroundColor
+    )
+        indicators[colCounter + 3].style.backgroundColor = "orange"
+    else
+        indicators[colCounter + 3].style.backgroundColor = "red"
+
+
+
+}
+
 function winnigCheck() {
     if (circles[colCounter].style.backgroundColor === circles[0].style.backgroundColor &&
         circles[colCounter + 1].style.backgroundColor === circles[1].style.backgroundColor &&
@@ -116,11 +169,16 @@ function winnigCheck() {
     ) {
         message.textContent = "Congratulation! You have won!!"
         message.style.visibility = "visible"
+        changeIndicators()
         colCounter = 41
     }
-    else
+    else {
+        changeIndicators()
+
         colCounter += 4
+    }
     if (colCounter == 40) {
+        changeIndicators()
         message.textContent = "Gameover"
         message.style.visibility = "visible"
     }
@@ -130,8 +188,11 @@ function reset() {
     message.textContent = ""
     message.style.visibility = "hidden"
     hiddenCol.style.visibility = "hidden"
-    circles.forEach((e)=>{
-        e.style.backgroundColor =""
+    circles.forEach((e) => {
+        e.style.backgroundColor = ""
+    })
+    indicators.forEach((e) => {
+        e.style.backgroundColor = ""
     })
     initialize()
 }
